@@ -1,183 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бинго Лотерея</title>
     <style>
-        /* Основные стили */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #0a0a0a; /* Тёмный фон */
-            color: #e0e0e0; /* Светлый текст */
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Скрыть скролл */
-            position: relative;
-        }
-
-        /* Анимированный фон с частицами */
-        #background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle, #0a0a0a 10%, #000 100%);
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00ffcc; /* Неоновый цвет частиц */
-            border-radius: 50%;
-            box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
-            animation: moveParticle linear infinite;
-        }
-
-        @keyframes moveParticle {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            100% {
-                transform: translateY(100vh) translateX(100vw);
-            }
-        }
-
-        /* Фон с персонажами */
-        #character-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: url('https://i.imgur.com/zenless-background.jpg') no-repeat center center/cover;
-            opacity: 0.3; /* Полупрозрачный фон */
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #00ffcc; /* Неоновый акцент */
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-            margin-top: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .ticket {
-            display: inline-block;
-            margin: 20px auto;
-            padding: 20px;
-            border: 2px solid #00ffcc; /* Неоновая рамка */
-            background-color: rgba(26, 26, 26, 0.8); /* Полупрозрачный тёмный фон */
-            border-radius: 10px;
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-            width: 220px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            margin: 5px;
-            border: 1px solid #00ffcc; /* Неоновая рамка */
-            border-radius: 50%; /* Круглые числа */
-            text-align: center;
-            font-weight: bold;
-            color: #00ffcc; /* Неоновый текст */
-            background-color: #1a1a1a;
-            box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
-        }
-
-        .matched {
-            background-color: #00ffcc; /* Неоновый фон для совпадений */
-            color: #0a0a0a; /* Тёмный текст */
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        button {
-            margin: 20px;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            background-color: #00ffcc; /* Неоновый фон */
-            color: #0a0a0a; /* Тёмный текст */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            position: relative;
-            z-index: 1;
-        }
-
-        button:hover {
-            background-color: #00e6b8; /* Более тёмный неоновый цвет */
-            box-shadow: 0 0 15px #00ffcc, 0 0 30px #00ffcc;
-        }
-
-        .buy-button {
-            margin-top: 15px;
-            padding: 8px 16px;
-            font-size: 1rem;
-            background-color: #00ffcc; /* Неоновый фон */
-            color: #0a0a0a; /* Тёмный текст */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-
-        .buy-button:hover {
-            background-color: #00e6b8; /* Более тёмный неоновый цвет */
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        #results {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: rgba(26, 26, 26, 0.8); /* Полупрозрачный тёмный фон */
-            border: 2px solid #00ffcc; /* Неоновая рамка */
-            border-radius: 10px;
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-            color: #e0e0e0; /* Светлый текст */
-            position: relative;
-            z-index: 1;
-        }
-
-        #results h2 {
-            color: #00ffcc; /* Неоновый акцент */
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        #results p {
-            margin: 10px 0;
-        }
+        /* Ваши стили */
     </style>
 </head>
 <body>
-    <!-- Анимированный фон с частицами -->
-    <div id="background">
-        <!-- Частицы -->
-        <div class="particle" style="top: 10%; left: 20%; animation-duration: 10s;"></div>
-        <div class="particle" style="top: 30%; left: 50%; animation-duration: 15s;"></div>
-        <div class="particle" style="top: 50%; left: 70%; animation-duration: 20s;"></div>
-        <div class="particle" style="top: 70%; left: 10%; animation-duration: 12s;"></div>
-        <div class="particle" style="top: 90%; left: 40%; animation-duration: 18s;"></div>
-    </div>
-
-    <!-- Фон с персонажами -->
-    <div id="character-background"></div>
-
     <h1>Бинго Лотерея</h1>
     <div id="tickets"></div>
     <button onclick="runDraw()">Провести тираж</button>
@@ -190,6 +21,9 @@
         let winningNumbers = []; // Выигрышные числа
         const ticketPrice = 0.1; // Цена билета в TON
         const prizePool = { jackpot: 640, single: 1, line: 10 }; // Призовые фонды
+
+        // Адрес testnet (один и тот же для оплаты и выдачи выигрыша)
+        const testnetWalletAddress = '0QCy-1NgOWV7u6HvCnvli3Amj9TsgYPYaQXxQLBAZF32fLhc';
 
         // Генерация билета
         function generateTicket() {
@@ -225,26 +59,23 @@
             document.getElementById('tickets').appendChild(ticketDiv);
         }
 
-        // Функция оплаты билета
+        // Функция оплаты билета (testnet)
         async function buyTicket(ticketId) {
-            // Интеграция с TON (пример с использованием TON Connect)
             try {
-                // Подключение кошелька
                 const wallet = await window.ton.connect();
                 if (!wallet) {
                     alert('Пожалуйста, подключите кошелёк TON.');
                     return;
                 }
 
-                // Отправка транзакции
+                // Отправка транзакции на ваш адрес testnet
                 const transaction = await wallet.sendTransaction({
-                    to: 'UQCr6d0pUuj6bAC31LHdrXjAdO8lL0VVzTQjtuMZjCtfO5lT', // Ваш адрес кошелька
-                    value: ticketPrice * 1e9, // Цена билета в наноTON (0.1 TON = 100,000,000 наноTON)
+                    to: testnetWalletAddress,
+                    value: ticketPrice * 1e9, // Цена билета в наноTON
                 });
 
                 if (transaction) {
                     alert('Оплата прошла успешно!');
-                    // Добавляем билет в список оплаченных
                     paidTickets.add(ticketId);
                 } else {
                     alert('Ошибка при оплате.');
@@ -252,6 +83,32 @@
             } catch (error) {
                 console.error('Ошибка:', error);
                 alert('Ошибка при оплате.');
+            }
+        }
+
+        // Функция выдачи выигрыша (testnet)
+        async function sendPrize(winnerAddress, amount) {
+            try {
+                const wallet = await window.ton.connect();
+                if (!wallet) {
+                    alert('Пожалуйста, подключите кошелёк TON.');
+                    return;
+                }
+
+                // Отправка выигрыша с вашего адреса testnet
+                const transaction = await wallet.sendTransaction({
+                    to: winnerAddress,
+                    value: amount * 1e9, // Переводим TON в наноTON
+                });
+
+                if (transaction) {
+                    alert('Выигрыш отправлен!');
+                } else {
+                    alert('Ошибка при отправке выигрыша.');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка при отправке выигрыша.');
             }
         }
 
@@ -319,6 +176,12 @@
             resultsDiv.innerHTML += `<p>Джекпот: ${jackpotWinners.length > 0 ? 'Билеты ' + jackpotWinners.join(', ') : 'Нет победителей'}</p>`;
             resultsDiv.innerHTML += `<p>1 поле: ${singleWinners.length > 0 ? 'Билеты ' + singleWinners.join(', ') : 'Нет победителей'}</p>`;
             resultsDiv.innerHTML += `<p>Горизонтальная линия: ${lineWinners.length > 0 ? 'Билеты ' + lineWinners.join(', ') : 'Нет победителей'}</p>`;
+
+            // Отправка выигрыша (пример для теста)
+            if (jackpotWinners.length > 0) {
+                const winnerAddress = testnetWalletAddress; // Используем тот же адрес для теста
+                sendPrize(winnerAddress, prizePool.jackpot);
+            }
         }
 
         // Инициализация
