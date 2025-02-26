@@ -61,31 +61,30 @@
 
         // Функция оплаты билета (testnet)
         async function buyTicket(ticketId) {
-            try {
-                const wallet = await window.ton.connect();
-                if (!wallet) {
-                    alert('Пожалуйста, подключите кошелёк TON.');
-                    return;
-                }
-
-                // Отправка транзакции на ваш адрес testnet
-                const transaction = await wallet.sendTransaction({
-                    to: testnetWalletAddress,
-                    value: ticketPrice * 1e9, // Цена билета в наноTON
-                });
-
-                if (transaction) {
-                    alert('Оплата прошла успешно!');
-                    paidTickets.add(ticketId);
-                } else {
-                    alert('Ошибка при оплате.');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Ошибка при оплате.');
-            }
+    try {
+        const wallet = await window.ton.connect();
+        if (!wallet) {
+            alert('Пожалуйста, подключите кошелёк TON.');
+            return;
         }
 
+        const testnetWalletAddress = '0QCy-1NgOWV7u6HvCnvli3Amj9TsgYPYaQXxQLBAZF32fLhc'; // Ваш адрес
+        const transaction = await wallet.sendTransaction({
+            to: testnetWalletAddress,
+            value: ticketPrice * 1e9, // Цена билета в наноTON
+        });
+
+        if (transaction) {
+            alert('Оплата прошла успешно!');
+            paidTickets.add(ticketId);
+        } else {
+            alert('Ошибка при оплате. Транзакция не была отправлена.');
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+        alert('Ошибка при оплате: ' + error.message);
+    }
+}
         // Функция выдачи выигрыша (testnet)
         async function sendPrize(winnerAddress, amount) {
             try {
